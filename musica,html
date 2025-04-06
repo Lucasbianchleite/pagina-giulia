@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Mensagem</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff3399;
+    }
+
+    iframe {
+      margin-top: 30px;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    }
+
+    .by-lucas {
+      margin-top: 40px;
+      font-size: 1.2em;
+      color: #ff66a3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Já que você sabe que é linda, te dedico essa música 💖</h1>
+
+  <iframe width="300" height="180" 
+    src="https://www.youtube.com/embed/DZmxSs_MPUI?autoplay=1"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>
+
+  <div class="by-lucas">by Lucas Bianchini</div>
+</body>
+</html>
