@@ -21,6 +21,7 @@
 
     #buttons {
       margin-top: 30px;
+      position: relative;
     }
 
     button {
@@ -30,20 +31,21 @@
       border: none;
       border-radius: 20px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.4s ease;
       box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      position: relative;
+      z-index: 2;
     }
 
     #sim {
       background-color: #ff66b2;
       color: white;
-      z-index: 2;
     }
 
     #nao {
       background-color: #ff99cc;
       color: white;
-      z-index: 2;
+      position: absolute;
     }
 
     #foto {
@@ -117,8 +119,18 @@
     let simScale = 1;
 
     naoBtn.addEventListener('click', () => {
+      // Faz o "Sim" crescer
       simScale += 0.3;
       simBtn.style.transform = `scale(${simScale})`;
+
+      // Faz o botão "Não" fugir
+      const maxX = window.innerWidth - naoBtn.offsetWidth;
+      const maxY = window.innerHeight - naoBtn.offsetHeight;
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      naoBtn.style.left = `${randomX}px`;
+      naoBtn.style.top = `${randomY}px`;
     });
 
     simBtn.addEventListener('click', () => {
