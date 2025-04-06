@@ -8,8 +8,8 @@
       background: linear-gradient(to bottom right, #ffe6f0, #ffd9ec);
       font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      margin: 0;
       overflow: hidden;
+      margin: 0;
     }
 
     h1 {
@@ -19,20 +19,12 @@
       text-shadow: 2px 2px #ffb6c1;
     }
 
-    #foto {
-      width: 250px;
-      border-radius: 25px;
-      margin-top: 20px;
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
-    }
-
     #buttons {
       margin-top: 30px;
       display: flex;
       justify-content: center;
       gap: 20px;
       position: relative;
-      flex-wrap: wrap;
     }
 
     button {
@@ -43,20 +35,28 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-      position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     #sim {
       background-color: #ff66b2;
       color: white;
+      transform-origin: center center;
     }
 
     #nao {
       background-color: #ff99cc;
       color: white;
       position: absolute;
+      left: 0;
       top: 0;
+    }
+
+    #foto {
+      margin-top: 30px;
+      width: 250px;
+      border-radius: 25px;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
     }
 
     .by-lucas {
@@ -66,11 +66,48 @@
       font-size: 1.3em;
       text-shadow: 1px 1px white;
     }
+
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-image: url('giulia.jpg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      animation: fall 6s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .emoji {
+      font-size: 40px;
+      position: absolute;
+      animation: float 8s ease-in-out infinite;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(30px, -30px); }
+      100% { transform: translate(0, 0); }
+    }
   </style>
 </head>
 <body>
-
   <h1>Você é linda?</h1>
+
   <img id="foto" src="giulia.jpg" alt="Foto Especial">
 
   <div id="buttons">
@@ -83,35 +120,56 @@
   <script>
     const simBtn = document.getElementById('sim');
     const naoBtn = document.getElementById('nao');
+    const buttonsDiv = document.getElementById('buttons');
 
     let simScale = 1;
     let naoOffsetX = 0;
+    let naoOffsetY = 0;
 
     naoBtn.addEventListener('click', () => {
-      // Aumenta o botão Sim em 20%
-      simScale *= 1.2;
-      simBtn.style.transform = `scale(${simScale})`;
+      // Aumenta o botão "Sim"
+      simScale += 0.2;
+      simBtn.style.transform = scale(${simScale});
 
-      // Move o botão Não pro lado
-      naoOffsetX += 30;
-      naoBtn.style.left = naoOffsetX + 'px';
-
-      // Se sair da tela, reinicia
-      if (naoOffsetX > window.innerWidth - 100) {
+      // Move levemente o botão "Não" pro lado e depois pra baixo
+      naoOffsetX += 20;
+      if (naoOffsetX > 200) {
         naoOffsetX = 0;
+        naoOffsetY += 30;
       }
 
-      // Verifica se o botão Sim já cobre a tela
-      const simWidth = simBtn.offsetWidth * simScale;
-      if (simWidth >= window.innerWidth - 50) {
-        simBtn.style.width = "100%";
-      }
+      naoBtn.style.transform = translate(${naoOffsetX}px, ${naoOffsetY}px);
     });
 
     simBtn.addEventListener('click', () => {
       window.location.href = "musica.html";
     });
-  </script>
 
+    // corações com a imagem da giulia
+    function createFallingHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = '-50px';
+      heart.style.width = heart.style.height = (Math.random() * 30 + 20) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    // emojis flutuando
+    function createEmoji() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('emoji');
+      emoji.textContent = ['💖', '💘', '💕', '💓', '💋'][Math.floor(Math.random() * 5)];
+      emoji.style.left = Math.random() * window.innerWidth + 'px';
+      emoji.style.top = Math.random() * window.innerHeight + 'px';
+      emoji.style.fontSize = Math.random() * 20 + 20 + 'px';
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 8000);
+    }
+
+    setInterval(createFallingHeart, 300);
+    setInterval(createEmoji, 800);
+  </script>
 </body>
 </html>
