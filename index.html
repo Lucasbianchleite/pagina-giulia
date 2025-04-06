@@ -21,31 +21,35 @@
 
     #buttons {
       margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
       position: relative;
     }
 
     button {
       font-size: 1.7em;
       padding: 15px 35px;
-      margin: 10px;
       border: none;
       border-radius: 20px;
       cursor: pointer;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-      position: relative;
       z-index: 2;
     }
 
     #sim {
       background-color: #ff66b2;
       color: white;
+      transform-origin: center center;
     }
 
     #nao {
       background-color: #ff99cc;
       color: white;
       position: absolute;
+      left: 0;
+      top: 0;
     }
 
     #foto {
@@ -104,33 +108,37 @@
 <body>
   <h1>Você é linda?</h1>
 
+  <img id="foto" src="giulia.jpg" alt="Foto Especial">
+
   <div id="buttons">
     <button id="sim">Sim</button>
     <button id="nao">Não</button>
   </div>
-
-  <img id="foto" src="giulia.jpg" alt="Foto Especial">
 
   <div class="by-lucas">by Lucas Bianchini</div>
 
   <script>
     const simBtn = document.getElementById('sim');
     const naoBtn = document.getElementById('nao');
+    const buttonsDiv = document.getElementById('buttons');
+
     let simScale = 1;
+    let naoOffsetX = 0;
+    let naoOffsetY = 0;
 
     naoBtn.addEventListener('click', () => {
-      // Faz o "Sim" crescer
-      simScale += 0.3;
+      // Aumenta o botão "Sim"
+      simScale += 0.2;
       simBtn.style.transform = `scale(${simScale})`;
 
-      // Faz o botão "Não" fugir
-      const maxX = window.innerWidth - naoBtn.offsetWidth;
-      const maxY = window.innerHeight - naoBtn.offsetHeight;
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
+      // Move levemente o botão "Não" pro lado e depois pra baixo
+      naoOffsetX += 20;
+      if (naoOffsetX > 200) {
+        naoOffsetX = 0;
+        naoOffsetY += 30;
+      }
 
-      naoBtn.style.left = `${randomX}px`;
-      naoBtn.style.top = `${randomY}px`;
+      naoBtn.style.transform = `translate(${naoOffsetX}px, ${naoOffsetY}px)`;
     });
 
     simBtn.addEventListener('click', () => {
