@@ -21,6 +21,7 @@
 
     #buttons {
       margin-top: 30px;
+      position: relative;
     }
 
     button {
@@ -30,8 +31,9 @@
       border: none;
       border-radius: 20px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: transform 0.3s ease, scale 0.3s ease;
       box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      position: relative;
     }
 
     #sim {
@@ -119,10 +121,16 @@
     const simBtn = document.getElementById('sim');
     const naoBtn = document.getElementById('nao');
     let simScale = 1;
+    let naoOffsetX = 0;
 
     naoBtn.addEventListener('click', () => {
+      // aumenta botão Sim
       simScale += 0.3;
       simBtn.style.transform = `scale(${simScale})`;
+
+      // move botão Não suavemente
+      naoOffsetX += 20; // move 20px pro lado a cada clique
+      naoBtn.style.transform = `translateX(${naoOffsetX}px)`;
     });
 
     simBtn.addEventListener('click', () => {
