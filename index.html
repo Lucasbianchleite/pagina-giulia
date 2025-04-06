@@ -34,10 +34,9 @@
     }
 
     #buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
       position: relative;
+      width: 300px;
+      height: 70px;
     }
 
     button {
@@ -49,20 +48,19 @@
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
       z-index: 2;
+      position: absolute;
     }
 
     #sim {
       background-color: #ff66b2;
       color: white;
-      transform-origin: center center;
+      left: 0;
+      top: 0;
     }
 
     #nao {
       background-color: #ff99cc;
       color: white;
-      position: absolute;
-      left: 0;
-      top: 0;
     }
 
     .by-lucas {
@@ -115,7 +113,6 @@
 <body>
   <h1>Você é linda?</h1>
 
-  <!-- Agrupamento centralizado -->
   <div id="conteudo-central">
     <img id="foto" src="giulia.jpg" alt="Foto Especial">
 
@@ -132,8 +129,12 @@
     const naoBtn = document.getElementById('nao');
 
     let simScale = 1;
-    let naoOffsetX = 0;
+    let naoOffsetX = 150; // Começa longe do botão "Sim"
     let naoOffsetY = 0;
+
+    // Posicionamento inicial do botão "Não"
+    naoBtn.style.left = naoOffsetX + 'px';
+    naoBtn.style.top = naoOffsetY + 'px';
 
     naoBtn.addEventListener('click', () => {
       // Aumenta o botão "Sim"
@@ -142,11 +143,13 @@
 
       // Move o botão "Não"
       naoOffsetX += 20;
-      if (naoOffsetX > 200) {
+      if (naoOffsetX > 220) {
         naoOffsetX = 0;
         naoOffsetY += 30;
       }
-      naoBtn.style.transform = `translate(${naoOffsetX}px, ${naoOffsetY}px)`;
+
+      naoBtn.style.left = naoOffsetX + 'px';
+      naoBtn.style.top = naoOffsetY + 'px';
     });
 
     simBtn.addEventListener('click', () => {
