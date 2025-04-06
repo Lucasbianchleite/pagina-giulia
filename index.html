@@ -65,14 +65,13 @@
 
     .heart {
       position: absolute;
-      width: 30px;
-      height: 30px;
       background-image: url('giulia.jpg');
       background-size: cover;
       background-position: center;
       border-radius: 50%;
       animation: fall 6s linear infinite;
       opacity: 0.6;
+      z-index: 1;
     }
 
     @keyframes fall {
@@ -92,6 +91,7 @@
       animation: float 8s ease-in-out infinite;
       opacity: 0.3;
       pointer-events: none;
+      z-index: 0;
     }
 
     @keyframes float {
@@ -128,8 +128,8 @@
       simScale += 0.3;
       simBtn.style.transform = `scale(${simScale})`;
 
-      // move botão Não suavemente
-      naoOffsetX += 20; // move 20px pro lado a cada clique
+      // move botão Não suavemente pro lado
+      naoOffsetX += 20;
       naoBtn.style.transform = `translateX(${naoOffsetX}px)`;
     });
 
@@ -137,15 +137,19 @@
       window.location.href = "musica.html";
     });
 
-    // corações com a imagem da giulia
+    // corações com a imagem da giulia (mais corações por vez!)
     function createFallingHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.top = '-50px';
-      heart.style.width = heart.style.height = (Math.random() * 30 + 20) + 'px';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
+      for (let i = 0; i < 3; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.top = '-50px';
+        const size = Math.random() * 30 + 20;
+        heart.style.width = size + 'px';
+        heart.style.height = size + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
     }
 
     // emojis flutuando
@@ -160,7 +164,8 @@
       setTimeout(() => emoji.remove(), 8000);
     }
 
-    setInterval(createFallingHeart, 300);
+    // agora os corações caem com muito mais frequência
+    setInterval(createFallingHeart, 100);
     setInterval(createEmoji, 800);
   </script>
 </body>
