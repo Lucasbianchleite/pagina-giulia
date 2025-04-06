@@ -18,17 +18,17 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      background-color: rgba(255, 250, 250, 0.85); /* fundo semi-transparente */
+      background-color: rgba(255, 250, 250, 0.85);
       padding: 30px;
       border-radius: 25px;
       box-shadow: 0 0 25px rgba(255, 105, 180, 0.2);
       position: relative;
-      z-index: 2; /* acima dos corações */
+      z-index: 2;
     }
 
     .container * {
       position: relative;
-      z-index: 3; /* texto acima dos corações */
+      z-index: 3;
     }
 
     h1 {
@@ -52,6 +52,32 @@
       font-size: 1.3em;
     }
 
+    .mensagem-final {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8em;
+      color: #db2c79;
+      text-align: center;
+      margin: 40px 0 20px;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     .heart {
       position: fixed;
       width: 25px;
@@ -63,7 +89,7 @@
       animation: fall 6s linear infinite;
       opacity: 0.6;
       pointer-events: none;
-      z-index: 1; /* abaixo do texto, acima do fundo */
+      z-index: 1;
     }
 
     @keyframes fall {
@@ -109,6 +135,14 @@
     <p>Se você sorriu, se seu coração deu um quentinho que seja… já valeu.</p>
 
     <p class="assinatura">Você é linda.</p>
+
+    <p class="mensagem-final">por fim, uma música que sempre me lembra você, com amor, LULU</p>
+
+    <div class="video-container">
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/uuZE_IRwLNI?autoplay=1&rel=0&showinfo=0&controls=1" 
+        title="Mirrors - Justin Timberlake" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
   </div>
 
   <script>
